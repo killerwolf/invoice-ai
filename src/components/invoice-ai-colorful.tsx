@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -20,6 +20,7 @@ export function InvoiceAiColorful() {
   const [transcribedFiles, setTranscribedFiles] = useState<TranscribedFile[]>([])
   const [isTranscribing, setIsTranscribing] = useState(false)
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -92,6 +93,10 @@ export function InvoiceAiColorful() {
     setIsTranscribing(false)
   }
 
+  const handleSelectFiles = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-indigo-600 text-white shadow-lg">
@@ -142,6 +147,7 @@ export function InvoiceAiColorful() {
                 <UploadCloud className="mx-auto h-12 w-12 text-indigo-400" />
                 <p className="mt-2 text-sm text-gray-600">Drag and drop files here, or click to select files</p>
                 <Input
+                  ref={fileInputRef}
                   id="file-upload"
                   type="file"
                   className="hidden"
@@ -149,9 +155,13 @@ export function InvoiceAiColorful() {
                   multiple
                   accept="image/*"
                 />
-                <Label htmlFor="file-upload" className="mt-4 inline-block hidden">
-                  <Button variant="outline" className="border-indigo-500 text-indigo-500 hover:bg-indigo-50">Select Files</Button>
-                </Label>
+                <Button 
+                  onClick={handleSelectFiles}
+                  variant="outline" 
+                  className="mt-4 border-indigo-500 text-indigo-500 hover:bg-indigo-50"
+                >
+                  Select Files
+                </Button>
               </div>
 
               {files.length > 0 && (
