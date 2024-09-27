@@ -55,7 +55,7 @@ export function InvoiceAiColorful() {
   const handleTranscribe = async () => {
     setError(null);
     setIsTranscribing(true)
-    const transcribed = []
+    const transcribed: TranscribedFile[] = []
   
     for (const file of files) {
       const formData = new FormData()
@@ -73,22 +73,13 @@ export function InvoiceAiColorful() {
   
         const result = await response.json()
         if (result.success) {
-          let data = result.transcribedText;
-          
-          try {
-            data = JSON.parse(result.transcribedText);
-            
-          } catch (e) {
-            console.error("Error parsing JSON:", e);
-          }
-          
           transcribed.push({
-            name: file.name.replace(/\\\\\\\\.[^/.]+$/, ".txt"),
-            url: URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' })),
-            data: data,
-          })
+            name: file.name,
+            url: URL.createObjectURL(new Blob([JSON.stringify(result.data, null, 2)], { type: 'text/plain' })),
+            data: result.data,
+          });
         } else {
-          setError(result.error);
+          setError(result.error || "Transcription failed");
         }
       } catch (error) {
         console.error("Error during transcription:", error);
@@ -96,8 +87,8 @@ export function InvoiceAiColorful() {
       }
     }
   
-    console.log(transcribed);
-    setTranscribedFiles(transcribed)
+    // Update the state with all transcribed files at once
+    setTranscribedFiles(prevFiles => [...prevFiles, ...transcribed]);
     setIsTranscribing(false)
   }
 
@@ -127,7 +118,7 @@ export function InvoiceAiColorful() {
         </div>
 
         <div className="max-w-3xl mx-auto mb-12">
-          <div className="flex justify-center items-center space-x-4 mb-8">
+          <div className="flex justify-center items-center space-x-4 mb-8 hidden">
             <span className={`text-lg ${isPaidTier ? 'text-gray-500' : 'text-indigo-600 font-semibold'}`}>Free Tier</span>
             <Switch
               checked={isPaidTier}
@@ -138,7 +129,7 @@ export function InvoiceAiColorful() {
           </div>
 
           <Card className="bg-white shadow-xl">
-            <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+            <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white hidden">
               <CardTitle className="text-2xl">Invoice Transcriber</CardTitle>
               <CardDescription className="text-indigo-100">Upload invoice images and get transcribed text files</CardDescription>
             </CardHeader>
@@ -158,7 +149,7 @@ export function InvoiceAiColorful() {
                   multiple
                   accept="image/*"
                 />
-                <Label htmlFor="file-upload" className="mt-4 inline-block">
+                <Label htmlFor="file-upload" className="mt-4 inline-block hidden">
                   <Button variant="outline" className="border-indigo-500 text-indigo-500 hover:bg-indigo-50">Select Files</Button>
                 </Label>
               </div>
@@ -187,15 +178,19 @@ export function InvoiceAiColorful() {
                   <h3 className="text-lg font-semibold mb-2 text-gray-700">Transcribed Files:</h3>
                   <ul className="space-y-2">
                     {transcribedFiles.map((file, index) => (
-                      <li key={index} className="flex items-center justify-between bg-green-50 p-2 rounded">
-                        <span className="text-green-600">{file.name}</span>
-                        <a href={file.url} download={file.name}>
-                          <Button variant="ghost" size="sm" className="text-green-500 hover:text-green-600">
-                            <Download className="h-4 w-4 mr-2" />
-                            Download
-                          </Button>
-                        </a>
-                        <pre>{JSON.stringify(file.data, null, 2)}</pre>
+                      <li key={index} className="flex flex-col bg-green-50 p-2 rounded">
+                        <div className="flex items-center justify-between">
+                          <span className="text-green-600">{file.name}</span>
+                          <a href={file.url} download={`${file.name}.json`}>
+                            <Button variant="ghost" size="sm" className="text-green-500 hover:text-green-600">
+                              <Download className="h-4 w-4 mr-2" />
+                              Download
+                            </Button>
+                          </a>
+                        </div>
+                        <pre className="mt-2 p-2 bg-white rounded text-sm overflow-x-auto">
+                          {JSON.stringify(file.data, null, 2)}
+                        </pre>
                       </li>
                     ))}
                   </ul>
@@ -215,7 +210,7 @@ export function InvoiceAiColorful() {
           </Card>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto hidden">
           <h2 className="text-3xl font-bold text-center mb-8 text-indigo-600">Choose Your Plan</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="bg-white shadow-xl">

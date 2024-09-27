@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Mistral } from '@mistralai/mistralai';
+import { parseMarkdownJson } from "../../../lib/parseMarkdownJson";
 
 export async function POST(request: Request) {
   console.log("Request received");
@@ -9,7 +10,7 @@ export async function POST(request: Request) {
 
   if (!apiKey) {
     console.error("Missing MISTRAL_API_KEY");
-    return NextResponse.json({ error: "Missing MISTRAL_API_KEY" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Missing MISTRAL_API_KEY" }, { status: 500 });
   }
 
   try {
@@ -45,18 +46,17 @@ export async function POST(request: Request) {
       const transcribedText = chatResponse.choices[0].message.content;
       try {
         const jsonData = JSON.parse(transcribedText);
-        console.log(jsonData);
-        return NextResponse.json({ transcribedText: jsonData });
+        return NextResponse.json({ success: true, data: jsonData });
       } catch {
-        console.log(transcribedText);
-        return NextResponse.json({ transcribedText: transcribedText });
+        const parsedData = parseMarkdownJson(transcribedText);
+        return NextResponse.json({ success: true, data: parsedData });
       }
     } else {
       console.error("Transcription failed - no content returned");
-      return NextResponse.json({ error: "Transcription failed - no content returned" }, { status: 500 });
+      return NextResponse.json({ success: false, error: "Transcription failed - no content returned" }, { status: 500 });
     }
   } catch (error) {
     console.error("Error during transcription:", error);
-    return NextResponse.json({ error: "Transcription failed" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Transcription failed" }, { status: 500 });
   }
 }
