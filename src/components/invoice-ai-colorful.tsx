@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { UploadCloud, FileText, Download, Trash2, Check, Zap } from 'lucide-react'
 import { Switch } from "@/components/ui/switch"
+import AnimatedText from '@/components/animated-text'
 
 interface TranscribedFile {
   name: string;
@@ -117,7 +118,13 @@ export function InvoiceAiColorful() {
 
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold text-indigo-600 mb-4">Transform Your Invoices into Text</h1>
+        <AnimatedText 
+        staticStart="Convert your"
+        animatedWords={[" JPG ", " PDF "]}
+        staticEnd="to text with our AI"
+        interval={2000}
+        animation="bounce"
+      />
           <p className="text-xl text-gray-600">Upload, transcribe, and download with the power of AI</p>
         </div>
 
