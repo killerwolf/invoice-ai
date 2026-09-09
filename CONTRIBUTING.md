@@ -46,7 +46,8 @@ invoice-ai/
 | `npm run dev` | Start local Next.js development server (`http://localhost:3000`) |
 | `npm run build` | Compile optimized production build |
 | `npm run start` | Start production server |
-| `npm run lint` | Run Next.js ESLint checks |
+| `npm run check` | Run Biome formatting, import sorting, and linting checks |
+| `npm run check:write` | Auto-format and apply safe Biome fixes |
 | `npm test` | Run Jest unit tests |
 
 ## Making a Change
@@ -55,7 +56,7 @@ invoice-ai/
 2. Implement your changes with corresponding tests in `src/lib/*.test.ts` where applicable.
 3. Run verification checks locally:
    ```bash
-   npm run lint
+   npm run check
    npm test
    npm run build
    ```

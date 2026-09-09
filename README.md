@@ -8,6 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Biome](https://img.shields.io/badge/Code_Quality-Biome-60a5fa?style=flat-square&logo=biome)](https://biomejs.dev/)
 [![Mistral AI](https://img.shields.io/badge/Powered%20by-Mistral%20AI-orange?style=flat-square)](https://mistral.ai/)
 
 <br />
@@ -131,7 +132,8 @@ InvoiceAI is a modern document extraction web application that transcribes scann
 | `npm run dev` | Starts the Next.js development server at `localhost:3000` |
 | `npm run build` | Compiles an optimized production build |
 | `npm run start` | Runs the compiled production app |
-| `npm run lint` | Runs ESLint checks |
+| `npm run check` | Runs Biome code quality checks (formatting, lints, and imports) |
+| `npm run check:write` | Automatically formats code and applies safe Biome fixes |
 | `npm test` | Runs Jest unit tests |
 | `node scripts/record-demo.mjs` | Records a demo GIF and MP4 video using headless Chrome |
 

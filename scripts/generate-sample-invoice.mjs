@@ -1,12 +1,13 @@
-import puppeteer from 'puppeteer-core';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import puppeteer from "puppeteer-core";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const outputPath = path.resolve(__dirname, '../public/sample-invoice.png');
+const outputPath = path.resolve(__dirname, "../public/sample-invoice.png");
 
-const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const chromePath =
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const invoiceHtml = `
 <!DOCTYPE html>
@@ -221,21 +222,21 @@ async function main() {
   const browser = await puppeteer.launch({
     executablePath: chromePath,
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   const page = await browser.newPage();
   await page.setViewport({ width: 800, height: 1050, deviceScaleFactor: 2 });
-  await page.setContent(invoiceHtml, { waitUntil: 'networkidle0' });
+  await page.setContent(invoiceHtml, { waitUntil: "networkidle0" });
 
-  const invoiceElement = await page.$('.invoice-box');
+  const invoiceElement = await page.$(".invoice-box");
   await invoiceElement.screenshot({ path: outputPath });
 
-  console.log('Sample invoice created at:', outputPath);
+  console.log("Sample invoice created at:", outputPath);
   await browser.close();
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
