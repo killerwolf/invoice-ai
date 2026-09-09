@@ -125,7 +125,7 @@ export function InvoiceAiColorful() {
         interval={2000}
         animation="bounce"
       />
-          <p className="text-xl text-gray-600">Téléchargez, transcrivez et téléchargez avec la puissance de l'IA</p>
+          <p className="text-xl text-gray-600">Téléchargez, transcrivez et téléchargez avec la puissance de l&apos;IA</p>
         </div>
 
         <div className="max-w-3xl mx-auto mb-12">
@@ -237,7 +237,7 @@ export function InvoiceAiColorful() {
               <CardContent className="pt-6">
                 <p className="text-4xl font-bold mb-4 text-indigo-600">0€<span className="text-lg font-normal text-gray-600">/mois</span></p>
                 <ul className="space-y-2">
-                  <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Jusqu'à 3 fichiers par lot</li>
+                  <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Jusqu&apos;à 3 fichiers par lot</li>
                   <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Précision de transcription de base</li>
                   <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Support 24 heures sur 24</li>
                 </ul>
@@ -255,7 +255,7 @@ export function InvoiceAiColorful() {
                 <p className="text-4xl font-bold mb-4 text-pink-600">29€<span className="text-lg font-normal text-gray-600">/mois</span></p>
                 <ul className="space-y-2">
                   <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Fichiers illimités par lot</li>
-                  <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Précision avancée alimentée par l'IA</li>
+                  <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Précision avancée alimentée par l&apos;IA</li>
                   <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Support prioritaire 24/7</li>
                   <li className="flex items-center text-gray-600"><Check className="h-5 w-5 text-green-500 mr-2" /> Intégrations personnalisées</li>
                 </ul>
@@ -273,7 +273,7 @@ export function InvoiceAiColorful() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h3 className="text-lg font-semibold mb-4 text-indigo-400">InvoiceAI</h3>
-              <p className="text-sm text-gray-400">Transformation du traitement des factures avec une technologie d'IA de pointe.</p>
+              <p className="text-sm text-gray-400">Transformation du traitement des factures avec une technologie d&apos;IA de pointe.</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-4 text-indigo-400">Liens rapides</h3>
