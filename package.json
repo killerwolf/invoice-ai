@@ -3,6 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "description": "Transform invoice images and PDFs into structured JSON with AI OCR powered by Mistral AI.",
+  "license": "MIT",
+  "author": "Hamdi Laadhari",
+  "homepage": "https://ai-invoice-transcribe.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/killerwolf/invoice-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/killerwolf/invoice-ai/issues"
+  },
+  "keywords": [
+    "invoice",
+    "ocr",
+    "transcribe",
+    "mistral-ai",
+    "document-ai",
+    "nextjs",
+    "react",
+    "tailwind",
+    "radix-ui",
+    "invoice-parser",
+    "fintech"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
