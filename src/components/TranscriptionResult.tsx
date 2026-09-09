@@ -7,7 +7,7 @@ interface TranscriptionResultProps {
 const TranscriptionResult: React.FC<TranscriptionResultProps> = ({ result }) => {
   return (
     <div className="transcription-result">
-      <h2>Transcription Result</h2>
+      <h2>Résultat de la transcription</h2>
       <p>{result}</p>
     </div>
   );

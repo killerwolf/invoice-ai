@@ -40,9 +40,9 @@ const animations = {
 }
 
 export default function AnimatedText({
-  staticStart = "Transcribe your",
+  staticStart = "Transcrire votre",
   animatedWords = ["JPG", "PDF", "DOC"],
-  staticEnd = "into Text easy with AI",
+  staticEnd = "en texte facilement avec l'IA",
   interval = 1500,
   animation = 'slide'
 }: AnimatedTextProps) {
